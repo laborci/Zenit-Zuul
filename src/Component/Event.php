@@ -1,6 +1,6 @@
 <?php namespace Zenit\Bundle\Zuul\Component;
 
-class Event{
+interface Event{
 	const AUTOLOGIN = __CLASS__.'AUTOLOGIN';
 	const LOGIN = __CLASS__.'LOGIN';
 	const LOGOUT = __CLASS__.'LOGOUT';
