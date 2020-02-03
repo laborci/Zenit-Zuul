@@ -1,6 +1,6 @@
 <?php namespace Zenit\Bundle\Zuul\Component\Auth\Middleware;
 
-use Zenit\Bundle\Mission\Module\Web\Pipeline\Middleware;
+use Zenit\Bundle\Mission\Component\Web\Pipeline\Middleware;
 use Zenit\Bundle\Zuul\Interfaces\AuthServiceInterface;
 
 class AuthCheck extends Middleware {

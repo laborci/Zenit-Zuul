@@ -1,6 +1,6 @@
 <?php namespace Zenit\Bundle\Zuul\Component\Auth\Action;
 
-use Zenit\Bundle\Mission\Module\Web\Responder\JsonResponder;
+use Zenit\Bundle\Mission\Component\Web\Responder\JsonResponder;
 use Zenit\Bundle\Zuul\Interfaces\AuthServiceInterface;
 
 class Login extends JsonResponder{
@@ -11,8 +11,8 @@ class Login extends JsonResponder{
 		$this->authService = $authService;
 	}
 
-	protected function respond(){
-		if (!$this->authService->login($this->getRequestBag()->get('login'), $this->getRequestBag()->get('password'), 'admin')){
+	protected function respond($role = null){
+		if (!$this->authService->login($this->getRequestBag()->get('login'), $this->getRequestBag()->get('password'), $role)){
 			$this->getResponse()->setStatusCode('401');
 		}
 	}

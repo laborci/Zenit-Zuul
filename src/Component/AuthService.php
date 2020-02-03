@@ -16,7 +16,7 @@ class AuthService implements AuthServiceInterface{
 		$this->repository = $repository;
 	}
 
-	public function login($login, $password, $permission = null): bool{
+	public function login($login, $password, $role = null): bool{
 		$user = $this->repository->authLoginLookup($login);
 
 		if(!$user){
@@ -29,7 +29,7 @@ class AuthService implements AuthServiceInterface{
 			return false;
 		}
 
-		if(!(is_null($permission) || $user->checkPermission($permission))){
+		if(!(is_null($role) || $user->checkRole($role))){
 			EventManager::fire(Event::LOGIN_ERROR_WRONG_PERMISSION, $login);
 			return false;
 		}
@@ -44,10 +44,10 @@ class AuthService implements AuthServiceInterface{
 	}
 	public function getAuthenticatedId(): int{ return $this->session->getUserId(); }
 
-	public function checkPermission($permission): bool{
+	public function checkRole($role): bool{
 		if(!$this->isAuthenticated()) return false;
 		if(!$this->repository->authLookup($this->session->getUserId())) return false;
-		return $this->repository->authLookup($this->session->getUserId())->checkPermission($permission);
+		return $this->repository->authLookup($this->session->getUserId())->checkRole($role);
 	}
 
 

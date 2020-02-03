@@ -1,5 +1,8 @@
 <?php namespace Zenit\Bundle\Zuul;
 
+use Zenit\Bundle\Zuul\Component\AuthService;
+use Zenit\Bundle\Zuul\Component\AuthSession;
+use Zenit\Bundle\Zuul\Component\WhoAmI;
 use Zenit\Bundle\Zuul\Interfaces\AuthenticableInterface;
 use Zenit\Bundle\Zuul\Interfaces\AuthRepositoryInterface;
 use Zenit\Bundle\Zuul\Interfaces\AuthServiceInterface;

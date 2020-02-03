@@ -32,7 +32,7 @@ class AutoLoginService implements SharedService{
 
 		$user = $this->authRepository->authLookup($userId);
 
-		if (!$user->checkPermission(null)){
+		if (!$user->checkRole(null)){
 			$this->autoLoginRepository->delete($token);
 			return false;
 		}

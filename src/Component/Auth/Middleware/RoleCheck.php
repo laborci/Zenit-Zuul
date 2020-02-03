@@ -1,9 +1,9 @@
 <?php namespace Zenit\Bundle\Zuul\Component\Auth\Middleware;
 
-use Zenit\Bundle\Mission\Module\Web\Pipeline\Middleware;
+use Zenit\Bundle\Mission\Component\Web\Pipeline\Middleware;
 use Zenit\Bundle\Zuul\Interfaces\AuthServiceInterface;
 
-class PermissionCheck extends Middleware {
+class RoleCheck extends Middleware {
 
 	protected $authService;
 
@@ -14,10 +14,10 @@ class PermissionCheck extends Middleware {
 	protected function run() {
 
 		$responder = $this->getArgumentsBag()->get('responder');
-		$permission = $this->getArgumentsBag()->get('permission');
+		$role = $this->getArgumentsBag()->get('role');
 		$logoutOnFail = $this->getArgumentsBag()->get('logout-on-fail');
 
-		if (!$this->authService->checkPermission($permission)) {
+		if (!$this->authService->checkRole($role)) {
 			if($logoutOnFail) $this->authService->logout();
 			$this->break($responder);
 		} else {
@@ -25,10 +25,10 @@ class PermissionCheck extends Middleware {
 		}
 	}
 
-	static public function config($responder, $permission, $logoutOnFail){
+	static public function config($responder, $role, $logoutOnFail){
 		return[
 			'responder' => $responder,
-			'permission'=>$permission,
+			'role'=>$role,
 			'logout-on-fail'=>$logoutOnFail
 		];
 	}
